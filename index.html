@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Demo</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css"/>
 </head>
 <body>
 <p>Buttons</p>
@@ -45,85 +45,13 @@
     <li>Look Up</li>
     <li>Share...</li>
 </div>
-<button id="show-edit-menu" class="asc">Show menu</button>
+<button class="asc asc-edit-menu-button">Show menu</button>
 <p>Select some text for showing menu</p>
-<p class="selectable-item">Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem
+<p class="asc-selectable-text">Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem
     ipsum Lorem ipsum Lorem
     ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem
     ipsum </p>
 
-<script>
-    function hideEditMenu(e) {
-        var editMenu = document.getElementById('asc-edit-menu');
-        if(!e || !editMenu.contains(e.target)) {
-            document.getElementById('asc-edit-menu').style.display = 'none';
-            removePageClickEvent();
-        }
-    }
-
-    function removePageClickEvent() {
-        document.getElementsByTagName('html')[0].removeEventListener('click', hideEditMenu);
-    }
-
-    function editMenuClick(e) {
-        removePageClickEvent();
-        var editMenu = document.getElementById('asc-edit-menu');
-        editMenu.style.display = 'flex';
-        var topOffset = e.target.getBoundingClientRect().top - editMenu.clientHeight - 10;
-        editMenu.style.top = topOffset + "px";
-        var leftOffset = e.clientX - editMenu.clientWidth / 2;
-        if (leftOffset < 10) {
-            leftOffset = 10;
-        }
-        if (leftOffset + editMenu.clientWidth > screen.availWidth) {
-            leftOffset = screen.availWidth - editMenu.clientWidth - 20;
-        }
-        editMenu.style.left = leftOffset + "px";
-
-        var offetForTriangle = (e.clientX || 0) - editMenu.offsetLeft - 5;// 5 is haft of width of triangle
-        if (offetForTriangle < 5) {
-            offetForTriangle = 5;
-        } else {
-            if (offetForTriangle + 10 + 14 >= editMenu.clientWidth) {
-                offetForTriangle = editMenu.clientWidth - 10 - 14;
-            }
-        }
-        var css = 'left: ' + (offetForTriangle) + 'px;';
-        addStyleToHead('div.asc-edit-menu:after{' + css + '}');
-
-        setTimeout(function () {
-            document.getElementsByTagName('html')[0].addEventListener('click', hideEditMenu);
-        }, 0);
-    }
-    hideEditMenu();
-    document.getElementById('show-edit-menu').addEventListener('click', editMenuClick);
-    function gText(e) {
-        var t = (document.all) ? document.selection.createRange().text : document.getSelection();
-        if (t.toString().length > 0) {
-            editMenuClick(e);
-        } else {
-            hideEditMenu(e);
-        }
-    }
-
-    var selectables = document.getElementsByClassName('selectable-item');
-    for (var item in selectables) {
-        selectables[item].onmouseup = gText;
-    }
-
-    function addStyleToHead(css) {
-        var head = document.head || document.getElementsByTagName('head')[0],
-            style = document.createElement('style');
-
-        style.type = 'text/css';
-        if (style.styleSheet) {
-            style.styleSheet.cssText = css;
-        } else {
-            style.appendChild(document.createTextNode(css));
-        }
-
-        head.appendChild(style);
-    }
-</script>
+<script src="code.js"></script>
 </body>
 </html>
